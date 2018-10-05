@@ -1,6 +1,6 @@
 package com.aaa;
 
-import com.aaa.model.HelloDTO;
+import com.aaa.model.entity.DomainRole;
 import com.aaa.util.DummyMockMVC;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class DummyIT {
         /* Nothing happens */
 
         // when
-        HelloDTO response = dummyMockMVC.dummyRequest();
+        DomainRole response = dummyMockMVC.dummyRequest();
 
         // then
         assertThat(response.getGreeting()).isEqualTo("asd");

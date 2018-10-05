@@ -1,6 +1,6 @@
 package com.aaa.util;
 
-import com.aaa.model.HelloDTO;
+import com.aaa.model.entity.DomainRole;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -12,8 +12,8 @@ public class DummyMockMVC extends AbstractMockMVC {
         super(mockMvc);
     }
 
-    public HelloDTO dummyRequest() {
+    public DomainRole dummyRequest() {
         MvcResult result = perform(get("/api/authentication/hello")).andReturn();
-        return readValue(getResultAsString(result), HelloDTO.class);
+        return readValue(getResultAsString(result), DomainRole.class);
     }
 }
