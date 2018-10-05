@@ -1,0 +1,43 @@
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### Gradle ###
+backend/build/
+e2e/build/
+.gradle
+gradle
+gradlew
+gradle
+gradlew.bat
+
+### JAVAC ###
+e2e/out/
+service/out/
+out/**
+
+### Mac ###
+.DS_Store
+
+### Log files ###
+*.log
+
+### Config ###
+**/application.properties
