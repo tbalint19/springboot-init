@@ -3,11 +3,8 @@ package com.aaa.service;
 import com.aaa.model.entity.Session;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,33 +12,27 @@ import java.util.Map;
 @Service
 public class TokenService {
 
-    @Autowired
-    private TimeService timeService;
-
     private static final String TOKEN_PREFIX = "Bearer ";
-    private static final String SECRET = "secret";
 
     public String createToken(Session session) {
-        Map<String, Object> claims = createClaims(session);
-        Date expirationTime = calculateExpirationTime();
         String token = Jwts.builder()
-                        .setClaims(claims)
-                        .setExpiration(expirationTime)
-                        .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
+                        .setClaims(claimsFromSession(session))
+                        .setExpiration(noExpiration())
+                        .signWith(SignatureAlgorithm.HS512, noSecret())
                         .compact();
         return TOKEN_PREFIX + token;
     }
 
     public String parseToken(String token) {
         return Jwts.parser()
-                .setSigningKey(SECRET.getBytes())
+                .setSigningKey(noSecret())
                 .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                 .getBody()
                 .get("sessionId", Object.class)
                 .toString();
     }
 
-    private Map<String, Object> createClaims(Session session) {
+    private Map<String, Object> claimsFromSession(Session session) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("sessionId", session.getSessionId());
         claims.put("userId", session.getUserId());
@@ -49,8 +40,13 @@ public class TokenService {
         return claims;
     }
 
-    private Date calculateExpirationTime() {
-        LocalDate oneDayAway = timeService.getNow().plusDays(1);
-        return Date.from(oneDayAway.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    private byte[] noSecret() {
+        /* The token is only used as a standard data transfer mechanism - credentials are checked server side */
+        return "nosecret".getBytes();
+    }
+
+    private Date noExpiration() {
+        /* Session should expire, and its expiration should be checked - not the token's */
+        return new Date(Long.MAX_VALUE);
     }
 }

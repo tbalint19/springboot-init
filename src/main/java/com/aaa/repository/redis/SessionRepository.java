@@ -4,6 +4,7 @@ import com.aaa.model.entity.Session;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,4 +18,6 @@ public interface SessionRepository extends CrudRepository<Session, String> {
     List<Session> findAll();
 
     void deleteBySessionId(String sessionId);
+
+    void deleteAllByCreatedAtBefore(LocalDateTime localDateTime);
 }

@@ -1,9 +1,9 @@
 package com.aaa.service;
 
 import com.aaa.model.entity.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,12 +11,19 @@ import java.util.stream.Collectors;
 @Service
 public class SessionService {
 
+    private final TimeService timeService;
+
+    @Autowired
+    public SessionService(TimeService timeService) {
+        this.timeService = timeService;
+    }
+
     public Session createSession(AuthEntity authEntity) {
         Session session = new Session();
 
         session.setUserId(authEntity.getId());
-        session.setCreatedAt(LocalDateTime.now());
-        session.setLastUsedAt(LocalDateTime.now());
+        session.setCreatedAt(timeService.getNow());
+        session.setLastUsedAt(timeService.getNow());
         session.setPermissions(authEntity.getDomainRole().getDomainPermissions()
                 .stream().map(DomainPermission::getName).collect(Collectors.toList()));
 

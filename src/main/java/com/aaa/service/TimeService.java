@@ -2,13 +2,14 @@ package com.aaa.service;
 
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Service
 public class TimeService {
 
-    public LocalDate getNow() {
-        return LocalDate.now();
+    public LocalDateTime getNow() {
+        return LocalDateTime.now(ZoneId.of("UTC"));
     }
+
 }

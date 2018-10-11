@@ -1,6 +1,9 @@
 package com.aaa.model.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,9 +14,11 @@ public class AuthEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private LocalDateTime createdAt;
     private String referenceId;
     private String email;
     private String password;
+    private Boolean confirmed;
 
     @OneToMany(mappedBy = "authEntity")
     private List<AuthEntityConfirmation> authEntityConfirmations;
@@ -91,6 +96,22 @@ public class AuthEntity {
         this.passwordResets = passwordResets;
     }
 
+    public Boolean getConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(Boolean confirmed) {
+        this.confirmed = confirmed;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -100,6 +121,8 @@ public class AuthEntity {
                 Objects.equals(referenceId, that.referenceId) &&
                 Objects.equals(email, that.email) &&
                 Objects.equals(password, that.password) &&
+                Objects.equals(confirmed, that.confirmed) &&
+                Objects.equals(createdAt, that.createdAt) &&
                 Objects.equals(authEntityConfirmations, that.authEntityConfirmations) &&
                 Objects.equals(domainRole, that.domainRole) &&
                 Objects.equals(memberships, that.memberships) &&
@@ -109,7 +132,7 @@ public class AuthEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, referenceId, email, password, authEntityConfirmations, domainRole, memberships, passwordResets);
+        return Objects.hash(id, referenceId, email, password, confirmed, createdAt, authEntityConfirmations, domainRole, memberships, passwordResets);
     }
 
     @Override
@@ -119,6 +142,8 @@ public class AuthEntity {
                 ", referenceId='" + referenceId + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", confirmed=" + confirmed +
+                ", createdAt=" + createdAt +
                 ", authEntityConfirmations=" + authEntityConfirmations +
                 ", domainRole=" + domainRole +
                 ", memberships=" + memberships +

@@ -55,7 +55,7 @@ public class Session implements Serializable {
         this.lastUsedAt = lastUsedAt;
     }
 
-    public static class GroupData {
+    public static class GroupData implements Serializable {
         private Long groupId;
         private List<String> permissions;
 

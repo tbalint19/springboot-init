@@ -13,9 +13,7 @@ public class PasswordReset {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CreationTimestamp
     private LocalDateTime createdAt;
-
     private String resetCode;
     private Boolean used;
 
