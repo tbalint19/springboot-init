@@ -13,6 +13,9 @@ import java.util.Objects;
 public class Session implements Serializable {
 
     @Id
+    private String id;
+
+    @Indexed
     private String sessionId;
 
     @Indexed
@@ -22,6 +25,14 @@ public class Session implements Serializable {
     private List<GroupData> groups;
     private LocalDateTime createdAt;
     private LocalDateTime lastUsedAt;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public List<String> getPermissions() {
         return permissions;
