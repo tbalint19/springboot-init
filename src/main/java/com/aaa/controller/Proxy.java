@@ -1,37 +1,23 @@
 package com.aaa.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class Proxy {
 
-    @Value("${core.api.url}")
-    private String coreApiUrl;
-
-    private RestTemplate restTemplate;
-
-    @Autowired
-    public Proxy(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
+    private static final String SECURE_PREFIX = "/secure";
 
     @RequestMapping("**")
-    public ResponseEntity api(HttpServletRequest request, HttpEntity entity) {
-        HttpMethod method = HttpMethod.resolve(request.getMethod());
-        String forwardUrl = coreApiUrl + request.getServletPath();
+    public String api(HttpServletRequest request) {
+        String forwardUrl = SECURE_PREFIX + request.getServletPath();
 
         // TODO - get token from header » authentication » authorization » accounting
+        System.out.println("Forward comes now...");
 
-        return restTemplate.exchange(forwardUrl, method, entity, String.class);
+        return "forward:/" + forwardUrl;
     }
 
 }

@@ -20,6 +20,4 @@ public class AdminController {
     // - remove from group - delete membership
     // - toggle activation of membership
 
-    //
-
 }
