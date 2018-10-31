@@ -1,13 +1,11 @@
 package com.aaa.model.entity;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-public class AuthEntityConfirmation {
+public class Confirmation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +16,7 @@ public class AuthEntityConfirmation {
     private Boolean used;
 
     @ManyToOne
-    private AuthEntity authEntity;
+    private UserAuthInterface userAuthInterface;
 
     public Long getId() {
         return id;
@@ -52,40 +50,40 @@ public class AuthEntityConfirmation {
         this.used = used;
     }
 
-    public AuthEntity getAuthEntity() {
-        return authEntity;
+    public UserAuthInterface getUserAuthInterface() {
+        return userAuthInterface;
     }
 
-    public void setAuthEntity(AuthEntity authEntity) {
-        this.authEntity = authEntity;
+    public void setUserAuthInterface(UserAuthInterface userAuthInterface) {
+        this.userAuthInterface = userAuthInterface;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AuthEntityConfirmation that = (AuthEntityConfirmation) o;
+        Confirmation that = (Confirmation) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(createdAt, that.createdAt) &&
                 Objects.equals(confirmCode, that.confirmCode) &&
                 Objects.equals(used, that.used) &&
-                Objects.equals(authEntity, that.authEntity);
+                Objects.equals(userAuthInterface, that.userAuthInterface);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, createdAt, confirmCode, used, authEntity);
+        return Objects.hash(id, createdAt, confirmCode, used, userAuthInterface);
     }
 
     @Override
     public String toString() {
-        return "AuthEntityConfirmation{" +
+        return "Confirmation{" +
                 "id=" + id +
                 ", createdAt=" + createdAt +
                 ", confirmCode='" + confirmCode + '\'' +
                 ", used=" + used +
-                ", authEntity=" + authEntity +
+                ", userAuthInterface=" + userAuthInterface +
                 '}';
     }
 }

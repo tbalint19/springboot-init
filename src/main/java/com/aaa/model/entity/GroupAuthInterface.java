@@ -6,13 +6,13 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "domain_group")
-public class Group {
+public class GroupAuthInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private Boolean active;
 
     @OneToMany(mappedBy = "group")
     private List<Membership> memberships;
@@ -25,12 +25,12 @@ public class Group {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public List<Membership> getMemberships() {
@@ -45,23 +45,23 @@ public class Group {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Group group = (Group) o;
-        return Objects.equals(id, group.id) &&
-                Objects.equals(name, group.name) &&
-                Objects.equals(memberships, group.memberships);
+        GroupAuthInterface groupAuthInterface = (GroupAuthInterface) o;
+        return Objects.equals(id, groupAuthInterface.id) &&
+                Objects.equals(active, groupAuthInterface.active) &&
+                Objects.equals(memberships, groupAuthInterface.memberships);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name, memberships);
+        return Objects.hash(id, active, memberships);
     }
 
     @Override
     public String toString() {
-        return "Group{" +
+        return "GroupAuthInterface{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", active=" + active +
                 ", memberships=" + memberships +
                 '}';
     }

@@ -1,28 +1,25 @@
 package com.aaa.model.entity;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class AuthEntity {
+public class UserAuthInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime createdAt;
-    private String referenceId;
     private String email;
     private String password;
     private Boolean confirmed;
     private Boolean active;
+    private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "authEntity")
-    private List<AuthEntityConfirmation> authEntityConfirmations;
+    private List<Confirmation> confirmations;
 
     @ManyToOne
     private DomainRole domainRole;
@@ -41,14 +38,6 @@ public class AuthEntity {
         this.id = id;
     }
 
-    public String getReferenceId() {
-        return referenceId;
-    }
-
-    public void setReferenceId(String referenceId) {
-        this.referenceId = referenceId;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -65,12 +54,12 @@ public class AuthEntity {
         this.password = password;
     }
 
-    public List<AuthEntityConfirmation> getAuthEntityConfirmations() {
-        return authEntityConfirmations;
+    public List<Confirmation> getConfirmations() {
+        return confirmations;
     }
 
-    public void setAuthEntityConfirmations(List<AuthEntityConfirmation> authEntityConfirmations) {
-        this.authEntityConfirmations = authEntityConfirmations;
+    public void setConfirmations(List<Confirmation> confirmations) {
+        this.confirmations = confirmations;
     }
 
     public DomainRole getDomainRole() {
@@ -125,14 +114,13 @@ public class AuthEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AuthEntity that = (AuthEntity) o;
+        UserAuthInterface that = (UserAuthInterface) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(referenceId, that.referenceId) &&
                 Objects.equals(email, that.email) &&
                 Objects.equals(password, that.password) &&
                 Objects.equals(confirmed, that.confirmed) &&
                 Objects.equals(createdAt, that.createdAt) &&
-                Objects.equals(authEntityConfirmations, that.authEntityConfirmations) &&
+                Objects.equals(confirmations, that.confirmations) &&
                 Objects.equals(domainRole, that.domainRole) &&
                 Objects.equals(memberships, that.memberships) &&
                 Objects.equals(passwordResets, that.passwordResets);
@@ -141,19 +129,18 @@ public class AuthEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, referenceId, email, password, confirmed, createdAt, authEntityConfirmations, domainRole, memberships, passwordResets);
+        return Objects.hash(id, email, password, confirmed, createdAt, confirmations, domainRole, memberships, passwordResets);
     }
 
     @Override
     public String toString() {
-        return "AuthEntity{" +
+        return "UserAuthInterface{" +
                 "id=" + id +
-                ", referenceId='" + referenceId + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", confirmed=" + confirmed +
                 ", createdAt=" + createdAt +
-                ", authEntityConfirmations=" + authEntityConfirmations +
+                ", confirmations=" + confirmations +
                 ", domainRole=" + domainRole +
                 ", memberships=" + memberships +
                 ", passwordResets=" + passwordResets +

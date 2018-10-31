@@ -1,7 +1,7 @@
 package com.aaa.service;
 
-import com.aaa.model.entity.AuthEntity;
-import com.aaa.model.entity.AuthEntityConfirmation;
+import com.aaa.model.entity.UserAuthInterface;
+import com.aaa.model.entity.Confirmation;
 import com.aaa.repository.rdb.AuthEntityConfirmationRepository;
 import com.aaa.util.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +20,18 @@ public class ConfirmationService {
         this.repository = repository;
     }
 
-    public AuthEntityConfirmation create(AuthEntity authEntity) {
-        AuthEntityConfirmation confirmation = new AuthEntityConfirmation();
+    public Confirmation create(UserAuthInterface userAuthInterface) {
+        Confirmation confirmation = new Confirmation();
 
         confirmation.setCreatedAt(time.getNow());
         confirmation.setConfirmCode(new RandomString(CODE_LENGTH).nextString());
         confirmation.setUsed(false);
-        confirmation.setAuthEntity(authEntity);
+        confirmation.setUserAuthInterface(userAuthInterface);
 
         return confirmation;
     }
 
-    public void save(AuthEntityConfirmation confirmation) {
+    public void save(Confirmation confirmation) {
         repository.save(confirmation);
     }
 }

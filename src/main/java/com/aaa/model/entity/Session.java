@@ -1,5 +1,6 @@
 package com.aaa.model.entity;
 
+import com.aaa.model.dto.GroupData;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
@@ -64,50 +65,6 @@ public class Session implements Serializable {
 
     public void setLastUsedAt(LocalDateTime lastUsedAt) {
         this.lastUsedAt = lastUsedAt;
-    }
-
-    public static class GroupData implements Serializable {
-        private Long groupId;
-        private List<String> permissions;
-
-        public Long getGroupId() {
-            return groupId;
-        }
-
-        public void setGroupId(Long groupId) {
-            this.groupId = groupId;
-        }
-
-        public List<String> getPermissions() {
-            return permissions;
-        }
-
-        public void setPermissions(List<String> permissions) {
-            this.permissions = permissions;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            GroupData groupData = (GroupData) o;
-            return Objects.equals(groupId, groupData.groupId) &&
-                    Objects.equals(permissions, groupData.permissions);
-        }
-
-        @Override
-        public int hashCode() {
-
-            return Objects.hash(groupId, permissions);
-        }
-
-        @Override
-        public String toString() {
-            return "GroupData{" +
-                    "groupId=" + groupId +
-                    ", permissions=" + permissions +
-                    '}';
-        }
     }
 
     public String getSessionId() {

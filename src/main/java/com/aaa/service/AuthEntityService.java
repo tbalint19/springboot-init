@@ -1,6 +1,6 @@
 package com.aaa.service;
 
-import com.aaa.model.entity.AuthEntity;
+import com.aaa.model.entity.UserAuthInterface;
 import com.aaa.repository.rdb.AuthEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public class AuthEntityService {
         this.repository = repository;
     }
 
-    public void save(AuthEntity entity) {
+    public void save(UserAuthInterface entity) {
         repository.save(entity);
     }
 }

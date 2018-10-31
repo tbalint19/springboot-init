@@ -10,11 +10,13 @@ public class Membership {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private AuthEntity authEntity;
+    private Boolean active;
 
     @ManyToOne
-    private Group group;
+    private UserAuthInterface userAuthInterface;
+
+    @ManyToOne
+    private GroupAuthInterface groupAuthInterface;
 
     @ManyToOne
     private GroupRole groupRole;
@@ -27,20 +29,28 @@ public class Membership {
         this.id = id;
     }
 
-    public AuthEntity getAuthEntity() {
-        return authEntity;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setAuthEntity(AuthEntity authEntity) {
-        this.authEntity = authEntity;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
-    public Group getGroup() {
-        return group;
+    public UserAuthInterface getUserAuthInterface() {
+        return userAuthInterface;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setUserAuthInterface(UserAuthInterface userAuthInterface) {
+        this.userAuthInterface = userAuthInterface;
+    }
+
+    public GroupAuthInterface getGroupAuthInterface() {
+        return groupAuthInterface;
+    }
+
+    public void setGroupAuthInterface(GroupAuthInterface groupAuthInterface) {
+        this.groupAuthInterface = groupAuthInterface;
     }
 
     public GroupRole getGroupRole() {
@@ -57,23 +67,25 @@ public class Membership {
         if (o == null || getClass() != o.getClass()) return false;
         Membership that = (Membership) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(authEntity, that.authEntity) &&
-                Objects.equals(group, that.group) &&
+                Objects.equals(active, that.active) &&
+                Objects.equals(userAuthInterface, that.userAuthInterface) &&
+                Objects.equals(groupAuthInterface, that.groupAuthInterface) &&
                 Objects.equals(groupRole, that.groupRole);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, authEntity, group, groupRole);
+        return Objects.hash(id, active, userAuthInterface, groupAuthInterface, groupRole);
     }
 
     @Override
     public String toString() {
         return "Membership{" +
                 "id=" + id +
-                ", authEntity=" + authEntity +
-                ", group=" + group +
+                ", active=" + active +
+                ", userAuthInterface=" + userAuthInterface +
+                ", groupAuthInterface=" + groupAuthInterface +
                 ", groupRole=" + groupRole +
                 '}';
     }

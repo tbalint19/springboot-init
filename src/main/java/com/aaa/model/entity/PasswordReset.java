@@ -1,7 +1,5 @@
 package com.aaa.model.entity;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -18,7 +16,7 @@ public class PasswordReset {
     private Boolean used;
 
     @ManyToOne
-    private AuthEntity authEntity;
+    private UserAuthInterface userAuthInterface;
 
     public Long getId() {
         return id;
@@ -52,12 +50,12 @@ public class PasswordReset {
         this.used = used;
     }
 
-    public AuthEntity getAuthEntity() {
-        return authEntity;
+    public UserAuthInterface getUserAuthInterface() {
+        return userAuthInterface;
     }
 
-    public void setAuthEntity(AuthEntity authEntity) {
-        this.authEntity = authEntity;
+    public void setUserAuthInterface(UserAuthInterface userAuthInterface) {
+        this.userAuthInterface = userAuthInterface;
     }
 
     @Override
@@ -69,13 +67,13 @@ public class PasswordReset {
                 Objects.equals(createdAt, that.createdAt) &&
                 Objects.equals(resetCode, that.resetCode) &&
                 Objects.equals(used, that.used) &&
-                Objects.equals(authEntity, that.authEntity);
+                Objects.equals(userAuthInterface, that.userAuthInterface);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, createdAt, resetCode, used, authEntity);
+        return Objects.hash(id, createdAt, resetCode, used, userAuthInterface);
     }
 
     @Override
@@ -85,7 +83,7 @@ public class PasswordReset {
                 ", createdAt=" + createdAt +
                 ", resetCode='" + resetCode + '\'' +
                 ", used=" + used +
-                ", authEntity=" + authEntity +
+                ", userAuthInterface=" + userAuthInterface +
                 '}';
     }
 }

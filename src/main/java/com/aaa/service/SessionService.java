@@ -1,5 +1,6 @@
 package com.aaa.service;
 
+import com.aaa.model.dto.GroupData;
 import com.aaa.model.entity.*;
 import com.aaa.repository.redis.SessionRepository;
 import com.aaa.util.RandomString;
@@ -25,26 +26,26 @@ public class SessionService {
         this.repository = repository;
     }
 
-    public Session createSession(AuthEntity authEntity) {
+    public Session createSession(UserAuthInterface userAuthInterface) {
         Session session = new Session();
 
-        session.setUserId(authEntity.getId());
+        session.setUserId(userAuthInterface.getId());
         session.setCreatedAt(timeService.getNow());
         session.setLastUsedAt(timeService.getNow());
-        session.setPermissions(authEntity.getDomainRole().getDomainPermissions()
+        session.setPermissions(userAuthInterface.getDomainRole().getDomainPermissions()
                 .stream().map(DomainPermission::getName).collect(Collectors.toList()));
 
-        List<Session.GroupData> groupDataList = new ArrayList<>();
-        for (Membership membership: authEntity.getMemberships()) {
-            Session.GroupData groupData = new Session.GroupData();
-            groupData.setGroupId(membership.getGroup().getId());
+        List<GroupData> groupDataList = new ArrayList<>();
+        for (Membership membership: userAuthInterface.getMemberships()) {
+            GroupData groupData = new GroupData();
+            groupData.setGroupId(membership.getGroupAuthInterface().getId());
             groupData.setPermissions(membership.getGroupRole().getGroupPermissions()
                     .stream().map(GroupPermission::getName).collect(Collectors.toList()));
             groupDataList.add(groupData);
         }
         session.setGroups(groupDataList);
 
-        session.setSessionId(generateSessionId(authEntity));
+        session.setSessionId(generateSessionId(userAuthInterface));
 
         return session;
     }
@@ -68,7 +69,7 @@ public class SessionService {
         return session;
     }
 
-    private String generateSessionId(AuthEntity authEntity) {
-        return hash.create(new RandomString(25).nextString() + authEntity.getId());
+    private String generateSessionId(UserAuthInterface userAuthInterface) {
+        return hash.create(new RandomString(25).nextString() + userAuthInterface.getId());
     }
 }

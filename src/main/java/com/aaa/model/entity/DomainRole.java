@@ -22,7 +22,7 @@ public class DomainRole {
     private Collection<DomainPermission> domainPermissions;
 
     @OneToMany(mappedBy = "domainRole")
-    private List<AuthEntity> authEntities;
+    private List<UserAuthInterface> authEntities;
 
     public Long getId() {
         return id;
@@ -48,11 +48,11 @@ public class DomainRole {
         this.domainPermissions = domainPermissions;
     }
 
-    public List<AuthEntity> getAuthEntities() {
+    public List<UserAuthInterface> getAuthEntities() {
         return authEntities;
     }
 
-    public void setAuthEntities(List<AuthEntity> authEntities) {
+    public void setAuthEntities(List<UserAuthInterface> authEntities) {
         this.authEntities = authEntities;
     }
 
