@@ -1,6 +1,6 @@
 package com.aaa.job;
 
-import com.aaa.repository.rdb.AuthEntityConfirmationRepository;
+import com.aaa.repository.rdb.UserAuthInterfaceConfirmationRepository;
 import com.aaa.service.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -12,11 +12,11 @@ public class ExpiredAuthEntityConfirmationMaintenance {
 
     private static Boolean shouldMonitor = false;
 
-    private AuthEntityConfirmationRepository repository;
+    private UserAuthInterfaceConfirmationRepository repository;
     private TimeService service;
 
     @Autowired
-    public ExpiredAuthEntityConfirmationMaintenance(AuthEntityConfirmationRepository repository, TimeService service) {
+    public ExpiredAuthEntityConfirmationMaintenance(UserAuthInterfaceConfirmationRepository repository, TimeService service) {
         this.repository = repository;
         this.service = service;
     }

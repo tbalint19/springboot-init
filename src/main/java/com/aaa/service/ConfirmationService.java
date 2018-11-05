@@ -1,8 +1,8 @@
 package com.aaa.service;
 
 import com.aaa.model.entity.UserAuthInterface;
-import com.aaa.model.entity.Confirmation;
-import com.aaa.repository.rdb.AuthEntityConfirmationRepository;
+import com.aaa.model.entity.UserAuthInterfaceConfirmation;
+import com.aaa.repository.rdb.UserAuthInterfaceConfirmationRepository;
 import com.aaa.util.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,26 +12,26 @@ public class ConfirmationService {
 
     private static final Integer CODE_LENGTH = 25;
     private final TimeService time;
-    private final AuthEntityConfirmationRepository repository;
+    private final UserAuthInterfaceConfirmationRepository repository;
 
     @Autowired
-    public ConfirmationService(TimeService timeService, AuthEntityConfirmationRepository repository) {
+    public ConfirmationService(TimeService timeService, UserAuthInterfaceConfirmationRepository repository) {
         this.time = timeService;
         this.repository = repository;
     }
 
-    public Confirmation create(UserAuthInterface userAuthInterface) {
-        Confirmation confirmation = new Confirmation();
+    public UserAuthInterfaceConfirmation create(UserAuthInterface userAuthInterface) {
+        UserAuthInterfaceConfirmation userAuthInterfaceConfirmation = new UserAuthInterfaceConfirmation();
 
-        confirmation.setCreatedAt(time.getNow());
-        confirmation.setConfirmCode(new RandomString(CODE_LENGTH).nextString());
-        confirmation.setUsed(false);
-        confirmation.setUserAuthInterface(userAuthInterface);
+        userAuthInterfaceConfirmation.setCreatedAt(time.getNow());
+        userAuthInterfaceConfirmation.setConfirmCode(new RandomString(CODE_LENGTH).nextString());
+        userAuthInterfaceConfirmation.setUsed(false);
+        userAuthInterfaceConfirmation.setUserAuthInterface(userAuthInterface);
 
-        return confirmation;
+        return userAuthInterfaceConfirmation;
     }
 
-    public void save(Confirmation confirmation) {
-        repository.save(confirmation);
+    public void save(UserAuthInterfaceConfirmation userAuthInterfaceConfirmation) {
+        repository.save(userAuthInterfaceConfirmation);
     }
 }

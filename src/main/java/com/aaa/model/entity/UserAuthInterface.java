@@ -18,17 +18,20 @@ public class UserAuthInterface {
     private Boolean active;
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "authEntity")
-    private List<Confirmation> confirmations;
+    @OneToMany(mappedBy = "userAuthInterface")
+    private List<UserAuthInterfaceConfirmation> userAuthInterfaceConfirmations;
 
     @ManyToOne
     private DomainRole domainRole;
 
-    @OneToMany(mappedBy = "authEntity")
+    @OneToMany(mappedBy = "userAuthInterface")
     private List<Membership> memberships;
 
-    @OneToMany(mappedBy = "authEntity")
+    @OneToMany(mappedBy = "userAuthInterface")
     private List<PasswordReset> passwordResets;
+
+    @OneToMany(mappedBy = "userAuthInterface")
+    private List<RequestReport> requestReports;
 
     public Long getId() {
         return id;
@@ -54,12 +57,12 @@ public class UserAuthInterface {
         this.password = password;
     }
 
-    public List<Confirmation> getConfirmations() {
-        return confirmations;
+    public List<UserAuthInterfaceConfirmation> getUserAuthInterfaceConfirmations() {
+        return userAuthInterfaceConfirmations;
     }
 
-    public void setConfirmations(List<Confirmation> confirmations) {
-        this.confirmations = confirmations;
+    public void setUserAuthInterfaceConfirmations(List<UserAuthInterfaceConfirmation> userAuthInterfaceConfirmations) {
+        this.userAuthInterfaceConfirmations = userAuthInterfaceConfirmations;
     }
 
     public DomainRole getDomainRole() {
@@ -120,7 +123,7 @@ public class UserAuthInterface {
                 Objects.equals(password, that.password) &&
                 Objects.equals(confirmed, that.confirmed) &&
                 Objects.equals(createdAt, that.createdAt) &&
-                Objects.equals(confirmations, that.confirmations) &&
+                Objects.equals(userAuthInterfaceConfirmations, that.userAuthInterfaceConfirmations) &&
                 Objects.equals(domainRole, that.domainRole) &&
                 Objects.equals(memberships, that.memberships) &&
                 Objects.equals(passwordResets, that.passwordResets);
@@ -129,7 +132,7 @@ public class UserAuthInterface {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, email, password, confirmed, createdAt, confirmations, domainRole, memberships, passwordResets);
+        return Objects.hash(id, email, password, confirmed, createdAt, userAuthInterfaceConfirmations, domainRole, memberships, passwordResets);
     }
 
     @Override
@@ -140,7 +143,7 @@ public class UserAuthInterface {
                 ", password='" + password + '\'' +
                 ", confirmed=" + confirmed +
                 ", createdAt=" + createdAt +
-                ", confirmations=" + confirmations +
+                ", userAuthInterfaceConfirmations=" + userAuthInterfaceConfirmations +
                 ", domainRole=" + domainRole +
                 ", memberships=" + memberships +
                 ", passwordResets=" + passwordResets +

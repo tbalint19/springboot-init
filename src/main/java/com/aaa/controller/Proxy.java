@@ -1,21 +1,22 @@
 package com.aaa.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Controller
+@Controller("/api")
 public class Proxy {
 
-    private static final String SECURE_PREFIX = "/secure";
+    @Value("${api.prefix.secure:/secure}")
+    private String securePrefix;
 
-    @RequestMapping("**")
+    @RequestMapping("/**")
     public String api(HttpServletRequest request) {
-        String forwardUrl = SECURE_PREFIX + request.getServletPath();
+        String forwardUrl = securePrefix + request.getServletPath();
 
         // TODO - get token from header » authentication » authorization » accounting
-        System.out.println("Forward comes now...");
 
         return "forward:/" + forwardUrl;
     }

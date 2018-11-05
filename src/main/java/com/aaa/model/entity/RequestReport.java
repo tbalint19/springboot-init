@@ -5,15 +5,15 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-public class Confirmation {
+public class RequestReport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime createdAt;
-    private String confirmCode;
-    private Boolean used;
+    private String url;
+    private String method;
+    private LocalDateTime requestTime;
 
     @ManyToOne
     private UserAuthInterface userAuthInterface;
@@ -26,28 +26,28 @@ public class Confirmation {
         this.id = id;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public String getUrl() {
+        return url;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getConfirmCode() {
-        return confirmCode;
+    public String getMethod() {
+        return method;
     }
 
-    public void setConfirmCode(String confirmCode) {
-        this.confirmCode = confirmCode;
+    public void setMethod(String method) {
+        this.method = method;
     }
 
-    public Boolean getUsed() {
-        return used;
+    public LocalDateTime getRequestTime() {
+        return requestTime;
     }
 
-    public void setUsed(Boolean used) {
-        this.used = used;
+    public void setRequestTime(LocalDateTime requestTime) {
+        this.requestTime = requestTime;
     }
 
     public UserAuthInterface getUserAuthInterface() {
@@ -62,27 +62,27 @@ public class Confirmation {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Confirmation that = (Confirmation) o;
+        RequestReport that = (RequestReport) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(createdAt, that.createdAt) &&
-                Objects.equals(confirmCode, that.confirmCode) &&
-                Objects.equals(used, that.used) &&
+                Objects.equals(url, that.url) &&
+                Objects.equals(method, that.method) &&
+                Objects.equals(requestTime, that.requestTime) &&
                 Objects.equals(userAuthInterface, that.userAuthInterface);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, createdAt, confirmCode, used, userAuthInterface);
+        return Objects.hash(id, url, method, requestTime, userAuthInterface);
     }
 
     @Override
     public String toString() {
-        return "Confirmation{" +
+        return "RequestReport{" +
                 "id=" + id +
-                ", createdAt=" + createdAt +
-                ", confirmCode='" + confirmCode + '\'' +
-                ", used=" + used +
+                ", url='" + url + '\'' +
+                ", method='" + method + '\'' +
+                ", requestTime=" + requestTime +
                 ", userAuthInterface=" + userAuthInterface +
                 '}';
     }

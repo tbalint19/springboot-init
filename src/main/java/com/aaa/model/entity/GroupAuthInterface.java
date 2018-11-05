@@ -14,7 +14,7 @@ public class GroupAuthInterface {
 
     private Boolean active;
 
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "groupAuthInterface")
     private List<Membership> memberships;
 
     public Long getId() {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 
 @Repository
-public interface AuthEntityRepository extends JpaRepository<UserAuthInterface, Long> {
+public interface UserAuthInterfaceRepository extends JpaRepository<UserAuthInterface, Long> {
 
     void deleteAllByConfirmedAndCreatedAtIsBefore(Boolean confirmed, LocalDateTime date);
 }

@@ -1,17 +1,17 @@
 package com.aaa.service;
 
 import com.aaa.model.entity.UserAuthInterface;
-import com.aaa.repository.rdb.AuthEntityRepository;
+import com.aaa.repository.rdb.UserAuthInterfaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthEntityService {
 
-    private AuthEntityRepository repository;
+    private UserAuthInterfaceRepository repository;
 
     @Autowired
-    private AuthEntityService(AuthEntityRepository repository) {
+    private AuthEntityService(UserAuthInterfaceRepository repository) {
         this.repository = repository;
     }
 

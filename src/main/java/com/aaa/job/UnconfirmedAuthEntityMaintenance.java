@@ -1,6 +1,6 @@
 package com.aaa.job;
 
-import com.aaa.repository.rdb.AuthEntityRepository;
+import com.aaa.repository.rdb.UserAuthInterfaceRepository;
 import com.aaa.service.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -12,11 +12,11 @@ public class UnconfirmedAuthEntityMaintenance {
 
     private static Boolean shouldMonitor = false;
 
-    private final AuthEntityRepository repository;
+    private final UserAuthInterfaceRepository repository;
     private final TimeService service;
 
     @Autowired
-    public UnconfirmedAuthEntityMaintenance(AuthEntityRepository repository, TimeService service) {
+    public UnconfirmedAuthEntityMaintenance(UserAuthInterfaceRepository repository, TimeService service) {
         this.repository = repository;
         this.service = service;
     }

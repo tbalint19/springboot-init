@@ -1,23 +1,65 @@
 package com.aaa.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.aaa.model.dto.StatusResponse;
+import com.aaa.model.entity.GroupAuthInterface;
+import com.aaa.model.entity.UserAuthInterface;
+import org.springframework.stereotype.Component;
 
-@RestController
-@RequestMapping("/_")
+@Component
 public class AdminController {
 
-    // domain permissions and group permissions are domain related, and created on startup
-    // extra features with new endpoints that require new permissions will lead to new deploy (new config)
-    // thus permission admin endpoints are not required
+    public UserAuthInterface createAuthInterface() {
+        return null;
+    }
 
-    // API
-    // - create group
-    // - delete group
-    // - toggle activation of group
+    public StatusResponse toggleAuthInterface() { return new StatusResponse(true); }
 
-    // - add to group - create membership
-    // - remove from group - delete membership
-    // - toggle activation of membership
+    public StatusResponse deleteAuthInterface() { return new StatusResponse(true); }
+
+    public GroupAuthInterface createGroup() {
+        return null;
+    }
+
+    public StatusResponse toggleGroup() {
+        return new StatusResponse(true);
+    }
+
+    public StatusResponse deleteGroup() {
+        return new StatusResponse(true);
+    }
+
+    public StatusResponse createMembership() {
+        return new StatusResponse(true);
+    }
+
+    public StatusResponse toggleMembership() {
+        return new StatusResponse(true);
+    }
+
+    public StatusResponse deleteMembership() {
+        return new StatusResponse(true);
+    }
+
+    public StatusResponse createDomainRole() {
+        return new StatusResponse(true);
+    }
+
+    public StatusResponse togglePermissionForDomainRole() {
+        return new StatusResponse(true);
+    }
+
+    public StatusResponse deleteDomainRole() {
+        return new StatusResponse(true);
+    }
+
+    public StatusResponse createGroupRole() { return new StatusResponse(true); }
+
+    public StatusResponse togglePermissionForGroupRole() {
+        return new StatusResponse(true);
+    }
+
+    public StatusResponse deleteGroupRole() {
+        return new StatusResponse(true);
+    }
 
 }

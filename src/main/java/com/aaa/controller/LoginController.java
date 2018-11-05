@@ -5,7 +5,7 @@ import com.aaa.model.dto.TokenResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/entity")
+@RequestMapping("/auth/api/entity")
 public class LoginController {
 
     @PostMapping("/login")
@@ -38,7 +38,7 @@ public class LoginController {
         return new StatusResponse(true);
     }
 
-    @PostMapping("/password/reset/attept")
+    @PostMapping("/password/reset/attempt")
     public StatusResponse setPassword(/* DTO */) {
 
         return new StatusResponse(true);
