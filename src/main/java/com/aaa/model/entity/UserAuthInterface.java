@@ -14,8 +14,11 @@ public class UserAuthInterface {
 
     private String email;
     private String password;
+
+    private Boolean passwordRequired;
     private Boolean confirmed;
     private Boolean active;
+
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "userAuthInterface")
@@ -57,6 +60,38 @@ public class UserAuthInterface {
         this.password = password;
     }
 
+    public Boolean isAuthenticationRequired() {
+        return passwordRequired;
+    }
+
+    public void setPasswordRequired(Boolean passwordRequired) {
+        this.passwordRequired = passwordRequired;
+    }
+
+    public Boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(Boolean confirmed) {
+        this.confirmed = confirmed;
+    }
+
+    public Boolean isActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public List<UserAuthInterfaceConfirmation> getUserAuthInterfaceConfirmations() {
         return userAuthInterfaceConfirmations;
     }
@@ -89,28 +124,12 @@ public class UserAuthInterface {
         this.passwordResets = passwordResets;
     }
 
-    public Boolean getConfirmed() {
-        return confirmed;
+    public List<RequestReport> getRequestReports() {
+        return requestReports;
     }
 
-    public void setConfirmed(Boolean confirmed) {
-        this.confirmed = confirmed;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
+    public void setRequestReports(List<RequestReport> requestReports) {
+        this.requestReports = requestReports;
     }
 
     @Override

@@ -10,13 +10,13 @@ import javax.mail.internet.MimeMessage;
 import java.util.concurrent.CompletableFuture;
 
 @Service
-public class MailSender {
+public class BuiltInMailSender {
 
     private JavaMailSender sender;
     private MailStatusLogger logger;
 
     @Autowired
-    public MailSender(JavaMailSender sender, MailStatusLogger logger) {
+    public BuiltInMailSender(JavaMailSender sender, MailStatusLogger logger) {
         this.sender = sender;
         this.logger = logger;
     }

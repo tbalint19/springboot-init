@@ -1,7 +1,7 @@
 package com.aaa.controller;
 
 import com.aaa.model.dto.AttemptResponse;
-import com.aaa.service.email.MailSender;
+import com.aaa.service.email.BuiltInMailSender;
 import com.aaa.service.email.TemplateRenderer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmailController {
 
-    private MailSender sender;
+    private BuiltInMailSender sender;
     private TemplateRenderer renderer;
 
     @Autowired
-    public EmailController(MailSender sender, TemplateRenderer renderer) {
+    public EmailController(BuiltInMailSender sender, TemplateRenderer renderer) {
         this.sender = sender;
         this.renderer = renderer;
     }
