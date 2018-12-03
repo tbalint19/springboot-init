@@ -18,23 +18,17 @@ public class EmailController {
         this.renderer = renderer;
     }
 
-    public AttemptResponse sendConfirmation() {
+    AttemptResponse sendConfirmation(String to) {
         String subject = "Account confirmation";
-        String to = null;
         String text = renderer.render("confirmation.ftl", null);
         sender.attemptSend(to, subject, text);
         return new AttemptResponse(true);
     }
 
-    public AttemptResponse sendReset() {
+    AttemptResponse sendReset(String to) {
         String subject = "Password reset";
-        String to = null;
         String text = renderer.render("reset.ftl", null);
         sender.attemptSend(to, subject, text);
-        return new AttemptResponse(true);
-    }
-
-    public AttemptResponse sendCustomMail() {
         return new AttemptResponse(true);
     }
 

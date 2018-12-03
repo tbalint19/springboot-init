@@ -1,18 +1,22 @@
 package com.aaa.model.entity;
 
+import com.aaa.annotation.filterChain.AuthEntity;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class UserAuthInterface {
+public class UserAuthInterface extends AuthEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String username;
     private String email;
+    private String phoneNumber;
     private String password;
 
     private Boolean passwordRequired;
@@ -42,6 +46,22 @@ public class UserAuthInterface {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
@@ -132,40 +152,54 @@ public class UserAuthInterface {
         this.requestReports = requestReports;
     }
 
+    public Boolean isPasswordRequired() {
+        return passwordRequired;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserAuthInterface that = (UserAuthInterface) o;
         return Objects.equals(id, that.id) &&
+                Objects.equals(username, that.username) &&
                 Objects.equals(email, that.email) &&
+                Objects.equals(phoneNumber, that.phoneNumber) &&
                 Objects.equals(password, that.password) &&
+                Objects.equals(passwordRequired, that.passwordRequired) &&
                 Objects.equals(confirmed, that.confirmed) &&
+                Objects.equals(active, that.active) &&
                 Objects.equals(createdAt, that.createdAt) &&
                 Objects.equals(userAuthInterfaceConfirmations, that.userAuthInterfaceConfirmations) &&
                 Objects.equals(domainRole, that.domainRole) &&
                 Objects.equals(memberships, that.memberships) &&
-                Objects.equals(passwordResets, that.passwordResets);
+                Objects.equals(passwordResets, that.passwordResets) &&
+                Objects.equals(requestReports, that.requestReports);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, email, password, confirmed, createdAt, userAuthInterfaceConfirmations, domainRole, memberships, passwordResets);
+        return Objects.hash(id, username, email, phoneNumber, password, passwordRequired, confirmed, active, createdAt, userAuthInterfaceConfirmations, domainRole, memberships, passwordResets, requestReports);
     }
 
     @Override
     public String toString() {
         return "UserAuthInterface{" +
                 "id=" + id +
+                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", password='" + password + '\'' +
+                ", passwordRequired=" + passwordRequired +
                 ", confirmed=" + confirmed +
+                ", active=" + active +
                 ", createdAt=" + createdAt +
                 ", userAuthInterfaceConfirmations=" + userAuthInterfaceConfirmations +
                 ", domainRole=" + domainRole +
                 ", memberships=" + memberships +
                 ", passwordResets=" + passwordResets +
+                ", requestReports=" + requestReports +
                 '}';
     }
 }

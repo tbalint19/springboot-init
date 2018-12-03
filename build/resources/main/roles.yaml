@@ -1,0 +1,23 @@
+# ---------- Permissions ----------
+
+DomainPermissions:
+  - "DoStuff"
+  - "DoOtherStuff"
+
+GroupPermissions:
+  - "DoSomething"
+
+
+# ---------- Roles ----------
+
+DefaultDomainRoles:
+  - Admin:
+    - "DoStuff"
+    - "DoOtherStuff"
+
+  - User:
+    - "DoStuff"
+
+DefaultGroupRoles:
+  - CompanyOwner:
+    - "DoSomething"

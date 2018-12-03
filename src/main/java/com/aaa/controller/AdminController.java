@@ -1,8 +1,6 @@
 package com.aaa.controller;
 
-import com.aaa.annotation.JWT;
 import com.aaa.model.dto.StatusResponse;
-import com.aaa.model.dto.Token;
 import com.aaa.model.entity.*;
 import com.aaa.model.param.UserAuthInterfaceCreateParams;
 import com.aaa.service.ConfirmationService;
@@ -11,7 +9,8 @@ import com.aaa.service.UserAuthInterfaceService;
 import com.aaa.service.HashService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Component
 public class AdminController {
@@ -37,26 +36,28 @@ public class AdminController {
     }
 
     public UserAuthInterface createUserAuthInterface(UserAuthInterfaceCreateParams params) {
+        String username = params.getUsername();
         String email = params.getEmail();
+        String phoneNumber = params.getEmail();
         String rawPassword = params.getRawPassword();
         Boolean manualConfirm = params.isManualConfirm();
         Boolean manualPasswordSet = params.isManualPasswordSet();
         Boolean passwordRequired = params.isPasswordRequired();
 
-        UserAuthInterface userAuthInterface = userAuthInterfaceService.create(
-                email, hash.create(rawPassword), manualConfirm, manualPasswordSet, passwordRequired);
+        UserAuthInterface userAuthInterface = userAuthInterfaceService.create(username,
+                email, phoneNumber, hash.create(rawPassword), manualConfirm, manualPasswordSet, passwordRequired);
         userAuthInterfaceService.save(userAuthInterface);
 
         if (manualConfirm) {
             UserAuthInterfaceConfirmation confirmation = confirmationService.create(userAuthInterface);
             confirmationService.save(confirmation);
-            emailController.sendConfirmation(/* TODO - DTO */);
+            emailController.sendConfirmation(email);
         }
 
         if (manualPasswordSet) {
             PasswordReset reset = passwordResetService.create(userAuthInterface);
             passwordResetService.save(reset);
-            emailController.sendReset(/* TODO - DTO */);
+            emailController.sendReset(email);
         }
 
         DomainRole domainRole = params.getDomainRole();
@@ -74,7 +75,9 @@ public class AdminController {
         return userAuthInterface;
     }
 
-    public StatusResponse toggleUserAuthInterface() { return new StatusResponse(true); }
+    public StatusResponse toggleUserAuthInterface() {
+        return new StatusResponse(true);
+    }
 
     public StatusResponse deleteUserAuthInterface() { return new StatusResponse(true); }
 
@@ -102,8 +105,8 @@ public class AdminController {
         return new StatusResponse(true);
     }
 
-    public StatusResponse createDomainRole() {
-        return new StatusResponse(true);
+    public DomainRole createDomainRole(String name, List<DomainPermission> permissions) {
+        return null;
     }
 
     public StatusResponse togglePermissionForDomainRole() {
@@ -120,9 +123,7 @@ public class AdminController {
         return new StatusResponse(true);
     }
 
-    public StatusResponse deleteGroupRole(@JWT Token token, @RequestParam Long companyId) {
-        token.exists().with().both().groupPermission("CrudUser").forGroup(companyId).and().domainPermission("USER");
-
+    public StatusResponse deleteGroupRole() {
         return new StatusResponse(true);
     }
 

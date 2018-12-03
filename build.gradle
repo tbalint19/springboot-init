@@ -19,7 +19,7 @@ publishing {
 
 allprojects {
     group 'com.aaa'
-    version '0.0.52-SNAPSHOT'
+    version '0.0.71-SNAPSHOT'
 }
 
 sourceCompatibility = 1.8
@@ -43,6 +43,9 @@ dependencies {
     /* Email */
     compile("org.springframework.boot:spring-boot-starter-mail")
     compile("org.springframework.boot:spring-boot-starter-freemarker")
+
+    /* SMS */
+    compile group: "com.twilio.sdk", name: "twilio", version: "7.30.0"
 
     /* Redis */
     compile("org.springframework.data:spring-data-redis:2.0.9.RELEASE")

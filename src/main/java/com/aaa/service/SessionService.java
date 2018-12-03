@@ -1,5 +1,6 @@
 package com.aaa.service;
 
+import com.aaa.annotation.filterChain.AuthEntity;
 import com.aaa.model.dto.GroupData;
 import com.aaa.model.entity.*;
 import com.aaa.repository.redis.SessionRepository;
@@ -29,11 +30,14 @@ public class SessionService {
     public Session createSession(UserAuthInterface userAuthInterface) {
         Session session = new Session();
 
-        session.setUserId(userAuthInterface.getId());
+        session.setUserAuthInterfaceId(userAuthInterface.getId());
         session.setCreatedAt(timeService.getNow());
         session.setLastUsedAt(timeService.getNow());
-        session.setPermissions(userAuthInterface.getDomainRole().getDomainPermissions()
-                .stream().map(DomainPermission::getName).collect(Collectors.toList()));
+        if (userAuthInterface.getDomainRole() != null)
+            session.setPermissions(userAuthInterface.getDomainRole().getDomainPermissions()
+                    .stream().map(DomainPermission::getName).collect(Collectors.toList()));
+        else
+            session.setPermissions(new ArrayList<>());
 
         List<GroupData> groupDataList = new ArrayList<>();
         for (Membership membership: userAuthInterface.getMemberships()) {
@@ -54,6 +58,12 @@ public class SessionService {
         repository.save(session);
     }
 
+    public void deleteSession(Session session) {}
+
+    public void deleteSessions(AuthEntity user) {
+
+    }
+
     public Session loadSession(String sessionId) {
         Optional<Session> sessionOptional = repository.findBySessionId(sessionId);
         if (!sessionOptional.isPresent())
@@ -70,6 +80,6 @@ public class SessionService {
     }
 
     private String generateSessionId(UserAuthInterface userAuthInterface) {
-        return hash.create(new RandomString(25).nextString() + userAuthInterface.getId());
+        return new RandomString(32).nextString() + hash.create(userAuthInterface.getId().toString());
     }
 }

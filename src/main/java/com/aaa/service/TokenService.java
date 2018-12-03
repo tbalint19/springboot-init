@@ -35,7 +35,7 @@ public class TokenService {
     private Map<String, Object> claimsFromSession(Session session) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("sessionId", session.getSessionId());
-        claims.put("userId", session.getUserId());
+        claims.put("userId", session.getUserAuthInterfaceId());
         claims.put("permissions", session.getPermissions());
         return claims;
     }

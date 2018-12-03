@@ -20,12 +20,15 @@ public class Session implements Serializable {
     private String sessionId;
 
     @Indexed
-    private Long userId;
+    private Long userAuthInterfaceId;
 
     private List<String> permissions;
     private List<GroupData> groups;
     private LocalDateTime createdAt;
     private LocalDateTime lastUsedAt;
+
+    private String confirmCode;
+    private Boolean confirmed;
 
     public String getId() {
         return id;
@@ -75,12 +78,20 @@ public class Session implements Serializable {
         this.sessionId = sessionId;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getUserAuthInterfaceId() {
+        return userAuthInterfaceId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserAuthInterfaceId(Long userAuthInterfaceId) {
+        this.userAuthInterfaceId = userAuthInterfaceId;
+    }
+
+    public Boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(Boolean confirmed) {
+        this.confirmed = confirmed;
     }
 
     @Override
@@ -88,29 +99,33 @@ public class Session implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Session session = (Session) o;
-        return Objects.equals(sessionId, session.sessionId) &&
-                Objects.equals(userId, session.userId) &&
+        return Objects.equals(id, session.id) &&
+                Objects.equals(sessionId, session.sessionId) &&
+                Objects.equals(userAuthInterfaceId, session.userAuthInterfaceId) &&
                 Objects.equals(permissions, session.permissions) &&
                 Objects.equals(groups, session.groups) &&
                 Objects.equals(createdAt, session.createdAt) &&
-                Objects.equals(lastUsedAt, session.lastUsedAt);
+                Objects.equals(lastUsedAt, session.lastUsedAt) &&
+                Objects.equals(confirmed, session.confirmed);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(sessionId, userId, permissions, groups, createdAt, lastUsedAt);
+        return Objects.hash(id, sessionId, userAuthInterfaceId, permissions, groups, createdAt, lastUsedAt, confirmed);
     }
 
     @Override
     public String toString() {
         return "Session{" +
-                "sessionId='" + sessionId + '\'' +
-                ", userId='" + userId + '\'' +
+                "id='" + id + '\'' +
+                ", sessionId='" + sessionId + '\'' +
+                ", userAuthInterfaceId=" + userAuthInterfaceId +
                 ", permissions=" + permissions +
                 ", groups=" + groups +
                 ", createdAt=" + createdAt +
                 ", lastUsedAt=" + lastUsedAt +
+                ", confirmed=" + confirmed +
                 '}';
     }
 }
