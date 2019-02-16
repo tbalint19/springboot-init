@@ -1,9 +1,9 @@
 package com.aaa.service.sms;
 
-import com.aaa.model.dto.StatusResponse;
+import com.aaa.model.dto.AttemptResponse;
 
 public interface AuthSmsSender {
 
-    StatusResponse sendConfirmSms(String code, String phoneNumber);
+    AttemptResponse sendConfirmSms(String code, String phoneNumber);
 
 }

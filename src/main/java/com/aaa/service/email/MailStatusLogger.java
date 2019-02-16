@@ -16,14 +16,16 @@ public class MailStatusLogger {
     }
 
     void reportSuccess(String to, String subject){
-        SendAttempt attempt = new SendAttempt(true);
+        SendAttempt attempt = new SendAttempt();
+        attempt.setSuccessful(true);
         attempt.setTarget(to);
         attempt.setSubject(subject);
         repository.save(attempt);
     }
 
     void reportFailure(String to, String subject){
-        SendAttempt attempt = new SendAttempt(false);
+        SendAttempt attempt = new SendAttempt();
+        attempt.setSuccessful(false);
         attempt.setTarget(to);
         attempt.setSubject(subject);
         attempt.setComment("error");
