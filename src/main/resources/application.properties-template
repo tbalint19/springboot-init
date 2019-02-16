@@ -1,7 +1,7 @@
 ### DATABASE ###
 spring.datasource.url= jdbc:postgresql://localhost:5432/initial
-spring.datasource.username=balint
-spring.datasource.password=Fuzzwktrka88bcykjypt
+spring.datasource.username={{username}}
+spring.datasource.password={{password}}
 spring.jpa.hibernate.ddl-auto=create-drop
 # Disable feature detection by this undocumented parameter.
 # Check the org.hibernate.engine.jdbc.internal.JdbcServiceImpl.configure method for more details.
