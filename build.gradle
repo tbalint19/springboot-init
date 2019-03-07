@@ -18,8 +18,8 @@ publishing {
 }
 
 allprojects {
-    group 'com.aaa'
-    version '0.0.71-SNAPSHOT'
+    group 'com.init'
+    version '0.0.1-SNAPSHOT'
 }
 
 sourceCompatibility = 1.8
@@ -57,6 +57,9 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '25.0-jre'
     compile("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml")
     compile("com.fasterxml.jackson.core:jackson-databind")
+
+    /* Social */
+    compile 'com.google.api-client:google-api-client:1.24.1'
 
     /* Test */
     testCompile('org.springframework.boot:spring-boot-starter-test')
