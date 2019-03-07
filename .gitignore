@@ -32,6 +32,7 @@ gradlew.bat
 e2e/out/
 service/out/
 out/**
+build/
 
 ### Mac ###
 .DS_Store
